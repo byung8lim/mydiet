@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.byung8.mydiet.mapper.FitnessUnitMapper">
+
+	<select id="findFsUnitListByType" parameterType="com.byung8.mydiet.domain.FitnessUnit" resultType="com.byung8.mydiet.domain.FitnessUnit">
+		SELECT
+		  a.FS_ID      as fsUnitId 
+		, a.FS_VAL     as fsValue
+		, a.FS_NM_ENG  as fsUnitNameEng
+		, a.FS_NM      as fsUnitName
+		, a.FS_DTL     as description
+		, a.FS_TP_ID   as fsTypeId
+		, (SELECT b.CD_NM FROM TB_CMM_CD b where a.FS_TP_ID=b.CD_ID) as fsTypeName
+		, a.BS_UNT_ID  as bsUnitIdId
+		, (SELECT b.CD_NM FROM TB_CMM_CD b where a.BS_UNT_ID=b.CD_ID) as bsUnitName
+		, a.BS_UNT_VAL as bsUnitVal
+		, a.FS_UNT_VAL as fsUnitVal
+		, a.USE_YN     as useYn
+		, a.REG_DT     as regDt
+		, a.UDP_DT     as udpDt
+		FROM TB_FS_UNIT a
+		WHERE a.USE_YN='Y'
+		AND a.FS_TP_ID=#{fsTypeId}
+	</select>
+	
+	<select id="findFsUnitListByTypeAndName" parameterType="com.byung8.mydiet.domain.FitnessUnit" resultType="com.byung8.mydiet.domain.FitnessUnit">
+		SELECT
+		  a.FS_ID      as fsUnitId 
+		, a.FS_VAL     as fsValue
+		, a.FS_NM_ENG  as fsUnitNameEng
+		, a.FS_NM      as fsUnitName
+		, a.FS_DTL     as description
+		, a.FS_TP_ID   as fsTypeId
+		, (SELECT b.CD_NM FROM TB_CMM_CD b where a.FS_TP_ID=b.CD_ID) as fsTypeName
+		, a.BS_UNT_ID  as bsUnitIdId
+		, (SELECT b.CD_NM FROM TB_CMM_CD b where a.BS_UNT_ID=b.CD_ID) as bsUnitName
+		, a.BS_UNT_VAL as bsUnitVal
+		, a.FS_UNT_VAL as fsUnitVal
+		, a.USE_YN     as useYn
+		, a.REG_DT     as regDt
+		, a.UDP_DT     as udpDt
+		FROM TB_FS_UNIT a
+		WHERE a.USE_YN='Y'
+		AND a.FS_TP_ID=#{fsTypeId}
+		AND a.FS_NM LIKE CONCAT('%',#{fsTypeName},'%')
+	</select>
+	
+	<insert id="registerFsUnit" parameterType="com.byung8.mydiet.domain.FitnessUnit">
+		INSERT INTO TB_FS_UNIT (
+			FS_VAL
+			, FS_NM_ENG
+			, FS_NM
+			, FS_DTL
+			, FS_TP_ID
+			, BS_UNT_ID
+			, BS_UNT_VAL
+			, FS_UNT_VAL
+		) VALUES (
+			#{fsValue}
+			, #{fsUnitNameEng}
+			, #{fsUnitName}
+			, #{description}
+			, #{fsTypeId}
+			, #{bsUnitId}
+			, #{bsUnitVal}
+			, #{fsUnitVal}
+		)
+	</insert>
+</mapper>

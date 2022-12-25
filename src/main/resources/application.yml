@@ -1,0 +1,73 @@
+info:
+  app:
+    name: mydiet
+    version: 1.0.0-SNAPSHOT
+    description:  mydiet
+
+endpoints:
+  shutdown:
+    enabled: true
+    sensitive: false
+
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: metrics,health,prometheus
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.byung8.mydiet.mapper
+  configuration:
+    lazyLoadingEnabled: true
+    aggressiveLazyLoading: false
+    mapUnderscoreToCamelCase: true
+spring:
+  profiles:
+    active: prod
+---
+spring:
+  profiles: prod
+  pid:
+    file: /mydiet/run/mydiet.pid
+  datasource:
+    url: jdbc:mysql://${DB_URI}/fitness?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    username: ${DB_USER_NAME}
+    password: ${DB_USER_PASSWORD}
+    driverClassName: com.mysql.cj.jdbc.Driver
+logging:
+  config: classpath:logback-prod.xml
+log:
+  file:
+    path: "/mydiet/logs"
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+---
+spring:
+  profiles: local
+  pid:
+    file: E://dev/work/mydiet/run/mydiet.pid
+  datasource:
+    url: jdbc:mysql://192.168.0.111:30268/fitness?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    username: byung8
+    password: 1q2w3e4r5t
+    driverClassName: com.mysql.cj.jdbc.Driver
+logging:
+  config: classpath:logback-local.xml
+log:
+  file:
+    path: "E://dev/work/mydiet/logs"
+server:
+  port: 8083
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+ 

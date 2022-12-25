@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+    <!-- VM argments에 home.path 추가하여 사용 -->
+    
+    <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
+    	<target>System.err</target>
+    	<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      		<level>DEBUG</level>
+    	</filter>
+		<encoder>
+        	<pattern>%-5level | %d{yyyy-MM-dd HH:mm.ss.SSS} | %logger{35}[%method:%line][%thread] - %msg%n</pattern>
+    	</encoder>
+  	</appender>
+    
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    	<target>System.out</target>
+    	<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      		<level>DEBUG</level>
+    	</filter>
+    	<filter class="ch.qos.logback.classic.filter.LevelFilter">
+      		<level>DEBUG</level>
+      		<onMatch>DENY</onMatch>
+    	</filter>
+    	<filter class="ch.qos.logback.classic.filter.LevelFilter">
+      		<level>DEBUG</level>
+      		<onMatch>DENY</onMatch>
+    	</filter>
+        <encoder>
+            <pattern>%-5level | %d{yyyy-MM-dd HH:mm.ss.SSS} | %logger{35}[%method:%line][%thread] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="java.sql" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="STDOUT" />
+    </logger>
+    <logger name="org" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="STDOUT" />
+    </logger>
+    <logger name="org.apache.http" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="STDOUT" />
+    </logger>
+    <!-- Spring 관련 로그 -->
+    <logger name="org.springframework.boot" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="STDOUT" />
+    </logger>
+    <logger name="org.springframework.boot.web" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="STDOUT" />
+    </logger>
+    <logger name="org.springframework.boot.actuate" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="STDOUT" />
+    </logger>
+    <logger name="com.ulisesbocchio" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="STDOUT" />
+    </logger>
+    <logger name="com.netflix.zuul.http" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="STDOUT" />
+    </logger>
+    <logger name="com.zaxxer.hikari.pool" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="STDOUT" />
+    </logger>
+
+    <root level="${LOG_LEVEL:-DEBUG}">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="STDERR" />
+    </root>
+</configuration>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+    <springProperty name="logfilepath" source="log.file.path"/>
+    <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
+    	<target>System.err</target>
+    	<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      		<level>WARN</level>
+    	</filter>
+		<encoder>
+        	<pattern>%level %d{ISO8601} %logger{35} %method:%line %thread - %msg%n</pattern>
+    	</encoder>
+  	</appender>
+    
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    	<target>System.out</target>
+    	<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      		<level>INFO</level>
+    	</filter>
+    	<filter class="ch.qos.logback.classic.filter.LevelFilter">
+      		<level>WARN</level>
+      		<onMatch>DENY</onMatch>
+    	</filter>
+    	<filter class="ch.qos.logback.classic.filter.LevelFilter">
+      		<level>ERROR</level>
+      		<onMatch>DENY</onMatch>
+    	</filter>
+        <encoder>
+            <pattern>%level %d{ISO8601} %logger{35} %method:%line %thread - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<append>false</append>
+		<file>${log.file.path:-/mydiet/logs}/application.log</file>
+		<!-->prudent>true</prudent-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.file.path:-/mydiet/logs}/application-%d{yyyyMMdd}.log</fileNamePattern>
+			<maxHistory>5</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%level %d{ISO8601} %logger{35} %method:%line %thread - %msg%n</pattern>
+		</encoder>
+    </appender>
+
+    <logger name="java.sql" additivity="false">
+    	<level value="WARN" />
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="dailyRollingFileAppender" />
+    </logger>
+    <logger name="org.apache.http" additivity="false">
+        <level value="WARN" />
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="dailyRollingFileAppender" />
+    </logger>
+    <logger name="org.springframework.boot" additivity="false">
+        <level value="WARN" />
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="dailyRollingFileAppender" />
+    </logger>
+    <logger name="org.springframework.boot.web" additivity="false">
+        <level value="WARN" />
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="dailyRollingFileAppender" />
+    </logger>
+    <logger name="org.springframework.boot.actuate" additivity="false">
+        <level value="ERROR" />
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="dailyRollingFileAppender" />
+    </logger>
+    <logger name="com.zaxxer.hikari.pool" additivity="false">
+        <level value="WARN" />
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="dailyRollingFileAppender" />
+    </logger>
+
+    <root level="${LOG_LEVEL:-INFO}">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="STDERR" />
+        <appender-ref ref="dailyRollingFileAppender" />
+    </root>
+</configuration>
