@@ -5,113 +5,109 @@
 
 	<select id="findExerciseParamsByName" parameterType="java.lang.String" resultType="com.byung8.mydiet.domain.ExerciseParam">
 		SELECT
-		  a.PRM_ID as paramId
-		, a.PRM_NM as paramName
-		, a.PRM_NM_ENG as paramNameEng
-		, a.FS_DTL as description
-		, a.PRM_VAL as paramVal
+		  a.EXC_ID as paramId
+		, a.EXC_NM as paramName
+		, a.EXC_NM_ENG as paramNameEng
+		, a.DSC as description
+		, a.UNIT_CAL_VAL as paramVal
 		, a.AMT_UNT_ID as amountUnitId
-		, (SELECT b.CD_NM FROM TB_CMM_CD b WHERE a.AMT_UNT_ID=b.CD_ID AND b.GRP_VAL='05') as amountUnitName
-		, a.ANT_UNT_VAL amountUnitVal
+		, (SELECT b.CMM_CD_NM FROM TB_CMM_CD b WHERE a.AMT_UNT_ID=b.CMM_CD_ID AND b.GRP_CD='05') as amountUnitName
 		, a.USE_YN as useYn
 		, a.REG_DT as regDt
 		, a.UDP_DT as udpDt
-		FROM TB_EXC_PARM a
+		FROM TB_EXC_UNIT_CAL a
 		WHERE a.USE_YN='Y'
-		AND a.PRM_NM  LIKE CONCAT('%','${value}','%')
+		AND a.EXC_NM  LIKE CONCAT('%','${value}','%')
 	</select>
 	
 	<select id="findExerciseAll" resultType="com.byung8.mydiet.domain.ExerciseParam">
 		SELECT
-		  a.PRM_ID as paramId
-		, a.PRM_NM as paramName
-		, a.PRM_NM_ENG as paramNameEng
-		, a.FS_DTL as description
-		, a.PRM_VAL as paramVal
+		  a.EXC_ID as paramId
+		, a.EXC_NM as paramName
+		, a.EXC_NM_ENG as paramNameEng
+		, a.DSC as description
+		, a.UNIT_CAL_VAL as paramVal
 		, a.AMT_UNT_ID as amountUnitId
-		, (SELECT b.CD_NM FROM TB_CMM_CD b WHERE a.AMT_UNT_ID=b.CD_ID AND b.GRP_VAL='05') as amountUnitName
-		, a.ANT_UNT_VAL amountUnitVal
+		, (SELECT b.CMM_CD_NM FROM TB_CMM_CD b WHERE a.AMT_UNT_ID=b.CMM_CD_ID AND b.GRP_CD='05') as amountUnitName
 		, a.USE_YN as useYn
 		, a.REG_DT as regDt
 		, a.UDP_DT as udpDt
-		FROM TB_EXC_PARM a
+		FROM TB_EXC_UNIT_CAL a
 		WHERE a.USE_YN='Y'
 	</select>
 	
-	<select id="findExerciseParamById" parameterType="int" resultType="com.byung8.mydiet.domain.ExerciseParam">
+	<select id="findExerciseParamById" parameterType="String" resultType="com.byung8.mydiet.domain.ExerciseParam">
 		SELECT
-		  a.PRM_ID as paramId
-		, a.PRM_NM as paramName
-		, a.PRM_NM_ENG as paramNameEng
-		, a.FS_DTL as description
-		, a.PRM_VAL as paramVal
+		  a.EXC_ID as paramId
+		, a.EXC_NM as paramName
+		, a.EXC_NM_ENG as paramNameEng
+		, a.DSC as description
+		, a.UNIT_CAL_VAL as paramVal
 		, a.AMT_UNT_ID as amountUnitId
-		, (SELECT b.CD_NM FROM TB_CMM_CD b WHERE a.AMT_UNT_ID=b.CD_ID AND b.GRP_VAL='05') as amountUnitName
-		, a.ANT_UNT_VAL amountUnitVal
+		, (SELECT b.CMM_CD_NM FROM TB_CMM_CD b WHERE a.AMT_UNT_ID=b.CMM_CD_ID AND b.GRP_CD='05') as amountUnitName
 		, a.USE_YN as useYn
 		, a.REG_DT as regDt
 		, a.UDP_DT as udpDt
-		FROM TB_EXC_PARM a
+		FROM TB_EXC_UNIT_CAL a
 		WHERE a.USE_YN='Y'
-		AND a.PRM_ID = ${value}
+		AND a.EXC_ID = '${value}'
 	</select>
 	
 	<select id="findExerciseAllParams" resultType="com.byung8.mydiet.domain.ExerciseParam">
 		SELECT
-		  a.PRM_ID as paramId
-		, a.PRM_NM as paramName
-		, a.PRM_NM_ENG as paramNameEng
-		, a.FS_DTL as description
-		, a.PRM_VAL as paramVal
+		  a.EXC_ID as paramId
+		, a.EXC_NM as paramName
+		, a.EXC_NM_ENG as paramNameEng
+		, a.DSC as description
+		, a.UNIT_CAL_VAL as paramVal
 		, a.AMT_UNT_ID as amountUnitId
-		, (SELECT b.CD_NM FROM TB_CMM_CD b WHERE a.AMT_UNT_ID=b.CD_ID AND b.GRP_VAL='05') as amountUnitName
-		, a.ANT_UNT_VAL amountUnitVal
+		, (SELECT b.CMM_CD_NM FROM TB_CMM_CD b WHERE a.AMT_UNT_ID=b.CMM_CD_ID AND b.GRP_CD='05') as amountUnitName
 		, a.USE_YN as useYn
 		, a.REG_DT as regDt
 		, a.UDP_DT as udpDt
-		FROM TB_EXC_PARM a
+		FROM TB_EXC_UNIT_CAL a
 		WHERE a.USE_YN='Y'
 	</select>
 	
 	<insert id="registerExerciseParam" parameterType="com.byung8.mydiet.domain.ExerciseParam" >
-		INSERT INTO TB_EXC_PARM (
-		  PRM_NM
-		, PRM_NM_ENG
-		, FS_DTL
-		, PRM_VAL
+		INSERT INTO TB_EXC_UNIT_CAL (
+		  EXC_ID
+		, EXC_NM_ENG
+		, EXC_NM
+		, DSC
+		, UNIT_CAL_VAL
 		, AMT_UNT_ID
-		, ANT_UNT_VAL
 		, UDP_DT
 		) VALUES (
-		  #{paramName}
+		  #{paramId}
 		, #{paramNameEng}
+		, #{paramName}
 		, #{description}
 		, #{paramVal}
 		, #{amountUnitId}
-		, #{amountUnitVal}
 		, NULL
 		)
 	</insert>
 
 	<update id="updateExerciseParam" parameterType="com.byung8.mydiet.domain.ExerciseParam">
-		UPDATE TB_EXC_PARM
-		SET PRM_NM_ENG=${paramNameEng}
-		, PRM_NM=${paramName}
-		, FS_DTL=${description}
-		, PRM_VAL=${PRM_VAL}
+		UPDATE TB_EXC_UNIT_CAL
+		SET EXC_NM_ENG=${paramNameEng}
+		, EXC_NM=${paramName}
+		, DSC=${description}
+		, UNIT_CAL_VAL=${paramVal}
 		WHERE
-		PRM_ID=${paramId}
+		EXC_ID=${paramId}
 	</update>
 
 	<update id="updateExerciseParamNotUsed" parameterType="com.byung8.mydiet.domain.ExerciseParam">
-		UPDATE TB_EXC_PARM
-		SET PRM_NM_ENG=${paramNameEng}
-		, PRM_NM=${paramName}
-		, FS_DTL=${description}
-		, PRM_VAL=${PRM_VAL}
+		UPDATE TB_EXC_UNIT_CAL
+		SET EXC_NM_ENG=${paramNameEng}
+		, EXC_NM=${paramName}
+		, DSC=${description}
+		, UNIT_CAL_VAL=${paramVal}
 		, USE_YN='N'
 		WHERE
-		PRM_ID=${paramId}
+		EXC_ID=${paramId}
 		AND USE_YN='Y'
 	</update>
 </mapper>

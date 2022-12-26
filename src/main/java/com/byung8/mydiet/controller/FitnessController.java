@@ -38,7 +38,7 @@ public class FitnessController {
 	}
 
 	@RequestMapping(value = "/exercise/calorie/{paramId}/{weight}/{minute}", method = RequestMethod.GET)
-	public ResponseEntity<String> calculateCalorie(@PathVariable("paramId") final int paramId
+	public ResponseEntity<String> calculateCalorie(@PathVariable("paramId") final String paramId
 			, @PathVariable("weight") final float weight
 			, @PathVariable("minute") final int minute) {
 
@@ -82,7 +82,7 @@ public class FitnessController {
 	}
 
 	@RequestMapping(value = "/exercise/param/{paramId}", method = RequestMethod.GET)
-	public ResponseEntity<String> getExcParam(@PathVariable("paramId") final int paramId) {
+	public ResponseEntity<String> getExcParam(@PathVariable("paramId") final String paramId) {
 
 		String txid = txId();
 		try {

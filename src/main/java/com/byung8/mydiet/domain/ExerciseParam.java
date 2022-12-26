@@ -11,30 +11,27 @@ import lombok.NoArgsConstructor;
 @Data
 public class ExerciseParam {
 /*
-	SELECT
-	  a.PRM_ID as paramId
-	, a.PRM_NM as paramName
-	, a.PRM_NM_ENG as paramNameEng
-	, a.PRM_DTL as description
-	, a.PRM_VAL as paramVal
-	, a.AMT_UNT_ID as amountUnitId
-	, (SELECT b.CD_NM FROM TB_CMM_CD b WHERE a.AMT_UNT_ID=b.CD_ID AND b.GRP_VAL='05') as amountUnitName
-	, a.ANT_UNT_VAL amountUnitVal
-	, a.USE_YN as useYn
-	, a.REG_DT as regDt
-	, a.UDP_DT as udpDt
-	FROM TB_EXC_PARM a
-	WHERE a.USE_YN='Y';
-	AND a.PRM_NM LIKE ${paramName}||'%'
+		SELECT
+		  a.EXC_ID as paramId
+		, a.EXC_NM as paramName
+		, a.EXC_NM_ENG as paramNameEng
+		, a.DSC as description
+		, a.UNIT_CAL_VAL as paramVal
+		, a.AMT_UNT_ID as amountUnitId
+		, (SELECT b.CMM_CD_NM FROM TB_CMM_CD b WHERE a.AMT_UNT_ID=b.CMM_CD_ID AND b.GRP_CD='05') as amountUnitName
+		, a.USE_YN as useYn
+		, a.REG_DT as regDt
+		, a.UDP_DT as udpDt
+		FROM TB_EXC_UNIT_CAL a
+		WHERE a.USE_YN='Y';'
  */
-	private int paramId;
+	private String paramId;
 	private String paramName;
 	private String paramNameEng;
 	private String description;
 	private float paramVal;
-	private int amountUnitId;
+	private String amountUnitId;
 	private String amountUnitName;
-	private int amountUnitVal;
 	private String useYn;
 	private Date regDt;
 	private Date udpDt;

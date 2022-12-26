@@ -20,7 +20,7 @@ public class ExerciseServiceImpl implements ExerciseService {
 	private ExerciseParamMapper excParamMapper;
 	
 	@Override
-	public Result calculateCalorie(int paramId, float weight, int excAmt, String txid) throws Byung8Exception {
+	public Result calculateCalorie(String paramId, float weight, int excAmt, String txid) throws Byung8Exception {
 		Result result = null;
 		try {
 			ExerciseParam param = excParamMapper.findExerciseParamById(paramId);
@@ -67,7 +67,7 @@ public class ExerciseServiceImpl implements ExerciseService {
 	}
 
 	@Override
-	public Result getExcParamById(int paramId, String txid) throws Byung8Exception {
+	public Result getExcParamById(String paramId, String txid) throws Byung8Exception {
 		Result result = null;
 		try {
 			ExerciseParam param = excParamMapper.findExerciseParamById(paramId);

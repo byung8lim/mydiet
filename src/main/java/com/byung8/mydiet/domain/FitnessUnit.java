@@ -11,32 +11,26 @@ import lombok.NoArgsConstructor;
 @Data
 public class FitnessUnit {
 /*
-  a.FS_ID      as fsUnitId 
-, a.FS_VAL     as fsValue
-, a.FS_NM_ENG  as fsUnitNameEng
-, a.FS_NM      as fsUnitName
-, a.FS_DTL     as description
-, a.FS_TP_ID   as fsTypeId
-, (SELECT b.CD_NM FROM TB_CMM_CD b where a.FS_TP_ID=b.CD_ID) as fsTypeName
-, a.BS_UNT_ID  as bsUnitIdId
-, (SELECT b.CD_NM FROM TB_CMM_CD b where a.BS_UNT_ID=b.CD_ID) as bsUnitName
-, a.BS_UNT_VAL as bsUnitVal
-, a.FS_UNT_VAL as fsUnitVal
-, a.USE_YN     as useYn
-, a.REG_DT     as regDt
-, a.UDP_DT     as udpDt
+		  a.FDCL_ID      as fsUnitId 
+		, a.FDCL_ENG_NM  as fsUnitNameEng
+		, a.FDCL_NM      as fsUnitName
+		, a.FD_TP_ID   as fsTypeId
+		, (SELECT b.CMM_CD_NM FROM TB_CMM_CD b where a.FD_TP_ID=b.CMM_CD_ID) as fsTypeName
+		, a.FD_UNIT_ID  as bsUnitIdId
+		, (SELECT b.FS_NM FROM TB_FS_UNIT b where a.FD_UNIT_ID=b.FS_ID) as bsUnitName
+		, a.UNT_CL_VAL as bsUnitVal
+		, a.USE_YN     as useYn
+		, a.REG_DT     as regDt
+		, a.UDP_DT     as udpDt
  */
-	private int fsUnitId;
-	private int fsValue;
+	private String fsUnitId;
 	private String fsUnitNameEng;
 	private String fsUnitName;
-	private String description;
-	private int fsTypeId;
+	private String fsTypeId;
 	private String fsTypeName;
-	private int bsUnitId;
+	private String bsUnitIdId;
 	private String bsUnitName;
 	private int bsUnitVal;
-	private int fsUnitVal;
 	private String useYn;
 	private Date regDt;
 	private Date udpDt;

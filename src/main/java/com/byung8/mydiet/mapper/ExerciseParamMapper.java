@@ -10,7 +10,7 @@ import com.byung8.mydiet.domain.ExerciseParam;
 @Mapper
 public interface ExerciseParamMapper {
 	int registerExerciseParam(ExerciseParam exerciseParam) throws SQLException;
-	ExerciseParam findExerciseParamById(int paramId) throws SQLException;
+	ExerciseParam findExerciseParamById(String paramId) throws SQLException;
 	List<ExerciseParam> findExerciseParamsByName(String paramName) throws SQLException;
 	List<ExerciseParam> findExerciseAll() throws SQLException;
 	List<ExerciseParam> findExerciseAllParams() throws SQLException;
