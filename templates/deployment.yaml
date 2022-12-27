@@ -15,7 +15,7 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        app: foodcalorie
+        app: mydiet
     spec:
       containers:
       - image: REGISTRY_URL/fitness/mydiet:latest
