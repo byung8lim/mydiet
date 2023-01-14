@@ -4,7 +4,7 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
-  name: membership
+  name: mydiet
   namespace: fitness
 spec:
   ingressClassName: nginx
@@ -14,9 +14,9 @@ spec:
       paths:
       - backend:
           service:
-            name: membership
+            name: mydiet
             port:
               number: 8080
-        path: /membership
+        path: /mydiet
         pathType: ImplementationSpecific
 status: {}
