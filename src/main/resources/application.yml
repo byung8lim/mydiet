@@ -44,6 +44,7 @@ log:
 server:
   port: 8080
   servlet:
+    context-path: /mydiet
     encoding:
       charset: UTF-8
       enabled: true
@@ -66,6 +67,7 @@ log:
 server:
   port: 8083
   servlet:
+    context-path: /mydiet
     encoding:
       charset: UTF-8
       enabled: true
