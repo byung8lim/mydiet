@@ -18,7 +18,7 @@ spec:
         app: mydiet
     spec:
       containers:
-      - image: harbor.wbl.com/fitness/mydiet:BLDID230114-192807
+      - image: harbor.wbl.com/fitness/mydiet:BLDID230114-203712
         name: mydiet
         volumeMounts:
         - mountPath: /etc/localtime
