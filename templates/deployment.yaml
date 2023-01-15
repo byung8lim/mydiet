@@ -25,7 +25,7 @@ spec:
           name: tz-seoul
         env:
         - name: DB_URI
-          value: mysql:3306
+          value: mysql.common:3306
         - name: DB_USER_NAME
           value: byung8
         - name: DB_USER_PASSWORD
