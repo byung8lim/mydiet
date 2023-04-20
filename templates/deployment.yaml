@@ -25,11 +25,18 @@ spec:
           name: tz-seoul
         env:
         - name: DB_URI
-          value: mysql.common:3306
+          valueFrom:
+            secretKeyRef:
+              name: fitness-sc
+              key: DB-URI
         - name: DB_USER_NAME
-          value: byung8
+            secretKeyRef:
+              name: fitness-sc
+              key: DB-USER-NAME
         - name: DB_USER_PASSWORD
-          value: 1q2w3e4r5t
+            secretKeyRef:
+              name: fitness-sc
+              key: DB-USER-PASSWORD
         resources: {}
       volumes:
       - hostPath:
