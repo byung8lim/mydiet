@@ -26,8 +26,8 @@ spec:
         env:
         - name: DB_URI
           valueFrom:
-            secretKeyRef:
-              name: fitness-sc
+            configMapKeyRef:
+              name: fitness-cm
               key: DB-URI
         - name: DB_USER_NAME
           valueFrom:
