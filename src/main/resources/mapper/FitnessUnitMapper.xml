@@ -18,7 +18,7 @@
 		, a.UDP_DT     as udpDt
 		FROM TB_FS_FDCL a
 		WHERE a.USE_YN='Y'
-		AND a.FD_TP_ID=#{fsTypeId}
+		AND a.FD_TP_ID='${fsTypeId}'
 	</select>
 	
 	<select id="findFsUnitListByTypeAndName" parameterType="com.byung8.mydiet.domain.FitnessUnit" resultType="com.byung8.mydiet.domain.FitnessUnit">
@@ -36,8 +36,8 @@
 		, a.UDP_DT     as udpDt
 		FROM TB_FS_FDCL a
 		WHERE a.USE_YN='Y'
-		AND a.FD_TP_ID=#{fsTypeId}
-		AND a.FDCL_NM LIKE CONCAT('%',#{fsUnitName},'%')
+		AND a.FD_TP_ID='${fsTypeId}'
+		AND a.FDCL_NM LIKE CONCAT('%','${fsUnitName}','%')
 	</select>
 	
 	<insert id="registerFsUnit" parameterType="com.byung8.mydiet.domain.FitnessUnit">
